@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="tk.Toplevel" id="mainwindow">
+    <property name="geometry">800x600</property>
+    <property name="minsize">600|400</property>
+    <property name="resizable">both</property>
+    <property name="title" translatable="yes">Flight Finder</property>
+    <child>
+      <object class="ttk.Frame" id="mw_fcontainer">
+        <property name="padding">2</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">nsew</property>
+          <rows>
+            <row id="1">
+              <property name="weight">1</property>
+            </row>
+          </rows>
+          <columns>
+            <column id="0">
+              <property name="weight">1</property>
+            </column>
+          </columns>
+        </layout>
+        <child>
+          <object class="ttk.Frame" id="mw_ftoolbar">
+            <property name="borderwidth">2</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">e</property>
+            </layout>
+            <child>
+              <object class="ttk.Menubutton" id="sort_by_menu_btn">
+                <property name="text" translatable="yes">Sort By Seats Transported (DESC)</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">0</property>
+                </layout>
+                <child>
+                  <object class="tk.Menu" id="sort_by_menu">
+                    <property name="tearoff">false</property>
+                    <child>
+                      <object class="tk.Menuitem.Command" id="sm_seats_transported_desc">
+                        <property name="command">on_sort_by_menu_action</property>
+                        <property name="command_id_arg">true</property>
+                        <property name="label" translatable="yes">Seats Transported (DESC)</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Menuitem.Command" id="sm_open_seats_desc">
+                        <property name="command">on_sort_by_menu_action</property>
+                        <property name="command_id_arg">true</property>
+                        <property name="label" translatable="yes">Open Seats (DESC)</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Frame" id="mw_fbottom">
+            <property name="borderwidth">1</property>
+            <property name="relief">ridge</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">ew</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="results_found_label">
+                <property name="underline">0</property>
+                <property name="width">0</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="pady">2</property>
+                  <property name="propagate">True</property>
+                  <property name="row">0</property>
+                  <property name="sticky">ew</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Panedwindow" id="mw_panes">
+            <property name="height">200</property>
+            <property name="orient">horizontal</property>
+            <property name="width">200</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">nsew</property>
+            </layout>
+            <child>
+              <object class="ttk.Panedwindow.Pane" id="filter_pane">
+                <property name="weight">0</property>
+                <child>
+                  <object class="ttk.Frame" id="filter_frame">
+                    <property name="height">200</property>
+                    <property name="padding">15</property>
+                    <property name="relief">sunken</property>
+                    <property name="width">200</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">ns</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Label" id="group_by_label">
+                        <property name="font">{Arial Black} 10 {bold}</property>
+                        <property name="text" translatable="yes">Group By</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="pady">4</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Menubutton" id="group_by_menu_btn">
+                        <property name="text" translatable="yes">Month</property>
+                        <property name="width">15</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="padx">20</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                          <property name="sticky">e</property>
+                        </layout>
+                        <child>
+                          <object class="tk.Menu" id="group_by_menu">
+                            <property name="tearoff">false</property>
+                            <child>
+                              <object class="tk.Menuitem.Command" id="gm_month">
+                                <property name="command">on_group_by_menu_action</property>
+                                <property name="command_id_arg">true</property>
+                                <property name="label" translatable="yes">Month</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="tk.Menuitem.Command" id="gm_airline">
+                                <property name="command">on_group_by_menu_action</property>
+                                <property name="command_id_arg">true</property>
+                                <property name="label" translatable="yes">Airline</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Separator" id="Separator_1">
+                        <property name="orient">horizontal</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="pady">10</property>
+                          <property name="propagate">True</property>
+                          <property name="row">2</property>
+                          <property name="sticky">ew</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="filter_label">
+                        <property name="font">{Arial Black} 10 {bold}</property>
+                        <property name="text" translatable="yes">Filter</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="pady">4</property>
+                          <property name="propagate">True</property>
+                          <property name="row">3</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Combobox" id="origin_box">
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">5</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="origin_label">
+                        <property name="text" translatable="yes">Origin</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">4</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="">
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">6</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="dest_label">
+                        <property name="text" translatable="yes">Destination</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">7</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Combobox" id="dest_box">
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">8</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="">
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">9</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="distance_label">
+                        <property name="text" translatable="yes">Distance</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">10</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Combobox" id="distance_filter_box">
+                        <property name="cursor">arrow</property>
+                        <property name="takefocus">true</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">11</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Panedwindow.Pane" id="results_pane">
+                <property name="weight">1</property>
+                <child>
+                  <object class="ttk.Frame" id="results_frame">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property name="sticky">nsew</property>
+                      <rows>
+                        <row id="0">
+                          <property name="weight">1</property>
+                        </row>
+                      </rows>
+                      <columns>
+                        <column id="0">
+                          <property name="weight">1</property>
+                        </column>
+                      </columns>
+                    </layout>
+                    <child>
+                      <object class="ttk.Treeview" id="results_tv">
+                        <property name="selectmode">extended</property>
+                        <property name="show">headings</property>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                          <property name="sticky">nsew</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Scrollbar" id="results_scrollbar">
+                        <property name="orient">vertical</property>
+                        <layout>
+                          <property name="column">1</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                          <property name="sticky">ns</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
